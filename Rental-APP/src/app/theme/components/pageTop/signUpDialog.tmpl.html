@@ -1,0 +1,427 @@
+<md-dialog style="padding: 0px;" class="col-lg-6 col-md-8 col-sm-12" aria-label="Sign up">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <img src="/assets/img/house2.png" style="margin-right: 5px;">
+            <h2> Sign up to RealHouse!</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon md-svg-src="assets/img/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content style="max-height:810px; ">
+        <form name="register" novalidate role="form" class="css-form">
+            <alert></alert>
+            <md-content>
+
+                <md-tabs md-selected="selectedIndex" md-dynamic-height md-border-bottom>
+
+                    <md-tab label="Basic account info">
+                        <md-content layout-padding="" ng-cloak="">
+                            <ng-form name="accountForm">
+                                <md-card layout="column">
+                                    <md-card-content style="height: 100%;">
+                                        <div layout-gt-sm="row">
+
+                                            <!--username-->
+                                            <md-input-container class="md-block" flex-gt-sm>
+                                                <label>Username</label>
+                                                <input
+                                                        id="username"
+                                                        name="username"
+                                                        type="text"
+                                                        ng-model="data.account.username"
+                                                        ng-minlength="5"
+                                                        md-maxlength="20"
+                                                        ng-pattern="/^[a-z\d\.]{5,}$/"
+                                                        username-available
+                                                        ng-model-options="{ updateOn: 'mousedown blur' }"
+                                                        required
+                                                />
+                                                <span ng-if="accountForm.$pending.username_not_available"
+                                                      style="position: sticky; margin-top: 4px; float:left">
+                                                                    Checking
+                                                                     <i class="fa fa fa-cog fa-spin"></i>
+                                                            </span>
+                                                <ng-messages for="accountForm.username.$error" role="alert"
+                                                             aria-live="assertive">
+                                                    <ng-message when="required">Required!</ng-message>
+                                                    <ng-message when="ng-minlength">Too short!</ng-message>
+                                                    <ng-message when="username">Invalid!</ng-message>
+                                                    <ng-message when="md-maxlength">Too long!</ng-message>
+                                                    <ng-message when="pattern">Username must consists at least 5 characters
+                                                        (A-Z, 0-9) and/or (".") between them!
+                                                    </ng-message>
+                                                    <ng-message when="username_not_available">{{checkUsernameResponse}}
+                                                    </ng-message>
+                                                </ng-messages>
+                                            </md-input-container>
+
+                                            <!--email-->
+                                            <md-input-container class="md-block" flex-gt-sm>
+                                                <label>Enter your email</label>
+                                                <input
+                                                        id="email"
+                                                        name="email"
+                                                        type="email"
+                                                        ng-model="data.account.email"
+                                                        ng-model-options="{ updateOn: 'mousedown blur' }"
+                                                        email-available
+                                                        required
+                                                >
+                                                <span ng-if="accountForm.$pending.email_not_available"
+                                                      style="position: sticky; margin-top: 4px; float:left">
+                                                                    Checking
+                                                                     <i class="fa fa fa-cog fa-spin"></i>
+                                                            </span>
+                                                <ng-messages for="accountForm.email.$error" role="alert" aria-live="assertive">
+                                                    <ng-message when="required">Required!</ng-message>
+                                                    <ng-message when="email">Invalid!</ng-message>
+                                                    <ng-message when="email_not_available">{{checkEmailResponse}}</ng-message>
+                                                </ng-messages>
+                                            </md-input-container>
+                                        </div>
+                                        <div layout-gt-sm="row">
+
+                                            <!--password-->
+                                            <md-input-container class="md-block" flex-gt-sm>
+                                                <label>Set a password</label>
+                                                <input
+                                                        id="password"
+                                                        name="password"
+                                                        type="password"
+                                                        ng-model="data.account.password"
+                                                        ng-minlength="8"
+                                                        md-maxlength="20"
+                                                        ng-pattern="/(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/"
+                                                        required
+                                                />
+                                                <ng-messages for="accountForm.password.$error" role="alert"
+                                                             aria-live="assertive">
+                                                    <ng-message when="required">Required!</ng-message>
+                                                    <ng-message when="minlength">Too short!</ng-message>
+                                                    <ng-message when="password">Invalid!</ng-message>
+                                                    <ng-message when="pattern">Valid passwords must be a mix of upper case,
+                                                        lower case, number/special characters!
+                                                    </ng-message>
+                                                    <ng-message when="md-maxlength">Too long!</ng-message>
+                                                </ng-messages>
+                                            </md-input-container>
+
+                                            <!--password_confirm-->
+                                            <md-input-container class="md-block" flex-gt-sm>
+                                                <label>Confirm password</label>
+                                                <input
+                                                        id="password_confirm"
+                                                        name="password_confirm"
+                                                        type="password"
+                                                        ng-model="data.account.password_confirm"
+                                                        ng-minlength="8"
+                                                        md-maxlength="20"
+                                                        ng-pattern="/(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/"
+                                                        pw-check="data.account.password"
+                                                        required
+                                                />
+                                                <ng-messages for="accountForm.password_confirm.$error" role="alert"
+                                                             aria-live="assertive">
+                                                    <ng-message when="required">Required!</ng-message>
+                                                    <ng-message when="minlength">Too short!</ng-message>
+                                                    <ng-message when="password_confirm">Invalid!</ng-message>
+                                                    <ng-message when="pattern">Valid passwords must be a mix of upper case,
+                                                        lower case, number/special characters!
+                                                    </ng-message>
+                                                    <ng-message when="md-maxlength">Too long!</ng-message>
+                                                    <ng-message when="pwCheck">Passwords don't match!</ng-message>
+                                                </ng-messages>
+                                            </md-input-container>
+                                        </div>
+                                        <div layout="column">
+                                            <!--account_type-->
+                                            <md-input-container class="md-block">
+                                                <p style="width: 76%">If you are interested to renting your home then you will
+                                                    need to register to RealHouse as a host:</p>
+                                                <md-switch class="md-primary" name="host" ng-model="data.account.host">
+                                                    I want to be a host.
+                                                </md-switch>
+                                                <img src="/assets/img/key.svg"
+                                                     style="top: 0px; right: 54px; position: absolute; width: 85px;"
+                                                     class="pull-right"
+                                                >
+                                            </md-input-container>
+                                        </div>
+                                    </md-card-content>
+                                </md-card>
+                                <!--next-->
+                                <md-button
+                                        type="button"
+                                        class="md-raised md-primary pull-right"
+                                        ng-click="selectedIndex=selectedIndex+1"
+                                        ng-disabled="user_tab=accountForm.$invalid || accountForm.$pending"
+                                >
+                                    Next
+                                    <i class="fa fa-arrow-right"></i>
+                                </md-button>
+
+                                <!--reset-->
+                                <md-button
+                                        class="md-warn pull-left"
+                                        type="button"
+                                        ng-disabled="accountForm.$pristine"
+                                        ng-click="reset(accountForm);"
+                                >
+                                    Reset
+                                    <i class="fa fa-eraser"></i>
+                                </md-button>
+
+                            </ng-form>
+                        </md-content>
+                    </md-tab>
+
+                    <md-tab label="Personal Info" ng-disabled="accountForm.$invalid">
+                        <md-content layout-padding="" ng-cloak="">
+                            <ng-form name="profileForm">
+                                <md-card layout="column">
+                                    <md-card-content style="height: 100%;">
+                                        <div layout-gt-sm="row">
+
+                                            <!--firstname-->
+                                            <md-input-container class="md-block" flex-gt-sm>
+                                                <label>First Name</label>
+                                                <md-icon md-svg-src="assets/img/ic_person_24px.svg"
+                                                         class="name"></md-icon>
+                                                <input
+                                                        name="firstname"
+                                                        id="firstname"
+                                                        ng-model="data.profile.firstname"
+                                                        required
+                                                        ng-minlength="3"
+                                                        md-maxlength="20"
+                                                        ng-pattern="/^([A-ZΑ-Ω]){1}[^0-9]*$/"
+                                                        upper-first-lower-rest-case
+                                                >
+                                                <ng-messages for="profileForm.firstname.$error" role="alert"
+                                                             aria-live="assertive">
+                                                    <ng-message when="required">Required!</ng-message>
+                                                    <ng-message when="ng-minlength">Too short!</ng-message>
+                                                    <ng-message when="firstname">Invalid!</ng-message>
+                                                    <ng-message when="pattern">A valid firstname must consist only of alphabet
+                                                        characters!
+                                                    </ng-message>
+                                                    <ng-message when="md-maxlength">Too long!</ng-message>
+                                                </ng-messages>
+                                            </md-input-container>
+
+                                            <!--lastname-->
+                                            <md-input-container class="md-block" flex-gt-sm>
+                                                <label>Last Name</label>
+                                                <md-icon md-svg-src="assets/img/ic_person_24px.svg"
+                                                         class="name"></md-icon>
+                                                <input
+                                                        name="lastname"
+                                                        id="lastname"
+                                                        ng-model="data.profile.lastname"
+                                                        required
+                                                        ng-minlength="3"
+                                                        md-maxlength="20"
+                                                        ng-pattern="/^([A-ZΑ-Ω]){1}[^0-9]*$/"
+                                                        upper-first-lower-rest-case
+                                                >
+
+                                                <ng-messages for="profileForm.lastname.$error" role="alert"
+                                                             aria-live="assertive">
+                                                    <ng-message when="required">Required!</ng-message>
+                                                    <ng-message when="ng-minlength">Too short!</ng-message>
+                                                    <ng-message when="lastname">Invalid!</ng-message>
+                                                    <ng-message when="pattern">A valid lastname must consist only of alphabet
+                                                        characters!
+                                                    </ng-message>
+                                                    <ng-message when="md-maxlength">Too long!</ng-message>
+                                                </ng-messages>
+                                            </md-input-container>
+                                        </div>
+                                        <div layout-gt-xs="row">
+                                            <!--phone-->
+                                            <md-input-container class="md-block" flex-gt-xs>
+                                                <label>Phone</label>
+                                                <md-icon md-svg-src="/assets/img/ic_phone_24px.svg"></md-icon>
+                                                <input
+                                                        id="phone"
+                                                        name="phone"
+                                                        type="tel"
+                                                        ng-model="data.profile.phone"
+                                                        ng-minlength="10"
+                                                        md-maxlength="10"
+                                                        ng-pattern="/^(?=^.{10,10}$)[0-9]*$/"
+                                                        phone-available
+                                                        ng-model-options="{ updateOn: 'mousedown blur' }"
+                                                        required
+                                                >
+                                                <span ng-if="profileForm.$pending.phone_not_available"
+                                                      style="position: sticky; margin-top: 4px; float:left">
+                                                                    Checking
+                                                                     <i class="fa fa fa-cog fa-spin"></i>
+                                                            </span>
+                                                <ng-messages for="profileForm.phone.$error" role="alert" aria-live="assertive">
+                                                    <ng-message when="required">Required!</ng-message>
+                                                    <ng-message when="ng-minlength">Too short!</ng-message>
+                                                    <ng-message when="pattern">A valid phone must consist exactly 10 numbers!
+                                                    </ng-message>
+                                                    <ng-message when="md-maxlength">Too long!</ng-message>
+                                                    <ng-message when="phone_not_available">{{checkPhoneResponse}}</ng-message>
+                                                </ng-messages>
+                                            </md-input-container>
+
+                                            <!--birthday-->
+                                            <md-input-container>
+                                                <label>Birthday</label>
+                                                <md-datepicker
+                                                        name="birthday"
+                                                        required
+                                                        ng-model="data.profile.birthday"
+                                                        md-current-view="year"
+                                                        md-placeholder="Enter your birthday..."
+                                                        md-max-date="maxDate"
+                                                >
+                                                </md-datepicker>
+                                                <div ng-messages="profileForm.birthday.$error">
+                                                    <div ng-message="required">Required!</div>
+                                                </div>
+                                            </md-input-container>
+                                        </div>
+                                    </md-card-content>
+                                </md-card>
+                                <md-button
+                                        class="md-warn pull-left"
+                                        ng-disabled="profileForm.$pristine"
+                                        ng-click="reset(profileForm)"
+                                >
+                                    Reset
+                                    <i class="fa fa-eraser"></i>
+                                </md-button>
+                                <md-button
+                                        type="button"
+                                        class="md-raised md-primary pull-right"
+                                        ng-click="selectedIndex=selectedIndex+1"
+                                        ng-disabled="contact_tab=profileForm.$invalid || profileForm.$pending"
+                                >
+                                    Next
+                                    <i class="fa fa-arrow-right"></i>
+                                </md-button>
+
+                            </ng-form>
+                        </md-content>
+                    </md-tab>
+
+                    <md-tab label="Setup your location" ng-disabled="accountForm.$invalid || profileForm.$invalid">
+                        <md-content layout-padding="" ng-cloak="">
+                            <ng-form name="addressForm">
+                                <md-card layout="column">
+                                    <md-card-content style="height: 100%;">
+                                        <div layout="column">
+                                            <md-input-container class="md-block">
+                                                <label>Setup your address</label>
+                                                <input
+                                                        id="formatted_address"
+                                                        name="formatted_address"
+                                                        type="text"
+                                                        ng-model="data.address.formatted_address"
+                                                        ng-minlength="4"
+                                                        placeholder="Write your full address..."
+                                                        valid-location
+                                                        required
+                                                        googleplace
+                                                />
+                                                <ng-messages for="addressForm.formatted_address.$error" role="alert"
+                                                             aria-live="assertive">
+                                                    <ng-message when="required">Required!</ng-message>
+                                                    <ng-message when="pattern">Wrong input!</ng-message>
+                                                    <ng-message when="ng-minlength">Too short!</ng-message>
+                                                    <ng-message when="location_invalid">Enter valid location!</ng-message>
+                                                </ng-messages>
+                                            </md-input-container>
+                                        </div>
+                                        <div layout="column">
+                                            <div id="registerMap"></div>
+                                        </div>
+                                    </md-card-content>
+                                </md-card>
+                                <md-button
+                                        class="md-warn pull-left"
+                                        ng-disabled="addressForm.$pristine"
+                                        ng-click="reset(addressForm)"
+                                >
+                                    Reset
+                                    <i class="fa fa-eraser"></i>
+                                </md-button>
+                                <md-button
+                                        type="button"
+                                        class="md-raised md-primary pull-right"
+                                        ng-click="selectedIndex=selectedIndex+1"
+                                        ng-disabled="submit_tab=addressForm.$invalid || addressForm.$pending"
+                                >
+                                    Next
+                                    <i class="fa fa-arrow-right"></i>
+                                </md-button>
+                            </ng-form>
+                        </md-content>
+                    </md-tab>
+
+                    <md-tab label="Review & Finish"
+                            ng-disabled="accountForm.$invalid || profileForm.$invalid || addressForm.$invalid">
+                        <md-content class="md-padding">
+                            <ng-form name="submit">
+
+                                <md-card layout="column">
+                                    <md-card-content style="height: 100%;">
+                                        <div layout="column">
+                                            <h5>Basic account info</h5>
+                                            <h6>Username: <span ng-bind="data.account.username"></span></h6>
+                                            <h6>Password: <span ng-bind="data.account.password"></span></h6>
+                                            <h6>Email: <span ng-bind="data.account.email"></span></h6>
+                                            <h6>Host: <span ng-bind="data.account.host"></span></h6>
+                                        </div>
+
+                                        <div layout="column">
+                                            <h5>Profile</h5>
+                                            <h6 ng-bind="data.profile.firstname"></h6>
+                                            <h6 ng-bind="data.profile.lastname"></h6>
+                                            <h6 ng-bind="data.profile.phone"></h6>
+                                            <h6 ng-bind="data.profile.birthday"></h6>
+                                        </div>
+
+                                        <div layout="column">
+                                            <h5>Location</h5>
+                                            <h6 ng-bind="data.address.formatted_address"></h6>
+                                        </div>
+                                    </md-card-content>
+                                </md-card>
+
+                                <div style="float: right;">
+                                    <!--BUTTON: Signup-->
+                                    <button ng-disabled="dataLoading || register.$invalid || register.$pending"
+                                            ng-class="{
+                                            'btn': true,
+                                            'btn-success': register.$valid,
+                                            'btn-warning': register.$invalid
+                                            }"
+                                            ng-click="signup()"
+                                    >
+                                        Register
+                                        <i ng-class="{'fa': true, 'fa fa-cog fa-spin': dataLoading,
+                                        'fa fa-sign-in': !dataLoading }"
+                                        ></i>
+                                    </button>
+                                </div>
+                            </ng-form>
+                        </md-content>
+                    </md-tab>
+                </md-tabs>
+
+
+                <div style="height:5px;">
+                    <md-progress-linear md-mode="indeterminate" ng-if="dataLoading"></md-progress-linear>
+                </div>
+            </md-content>
+        </form>
+    </md-dialog-content>
+</md-dialog>

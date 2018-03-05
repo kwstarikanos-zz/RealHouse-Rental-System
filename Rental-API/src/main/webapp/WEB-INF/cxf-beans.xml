@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws"
+       xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+
+	    http://cxf.apache.org/jaxrs
+	http://cxf.apache.org/schemas/jaxrs.xsd">
+    <import resource="classpath:META-INF/cxf/cxf.xml"/>
+
+    <jaxrs:server id="base" address="/">
+
+        <!-- INTERCEPTORS -->
+        <jaxrs:inInterceptors>
+            <ref bean="validationInInterceptor"/>
+        </jaxrs:inInterceptors>
+
+        <jaxrs:outInterceptors>
+            <ref bean="validationOutInterceptor"/>
+        </jaxrs:outInterceptors>
+
+
+        <!-- BEANS -->
+        <jaxrs:serviceBeans>
+            <!--RESOURCES-->
+            <ref bean="userResource"/>
+            <ref bean="authentication"/>
+            <ref bean="roomResource"/>
+            <ref bean="fileResource"/>
+            <ref bean="jaxRsApiApplication"/>
+            <ref bean="authenticatedUserProducer"/>
+
+            <!--SERVICES -->
+            <!--            <ref bean="daoService"/>-->
+            <ref bean="userService"/>
+            <ref bean="profileService"/>
+            <ref bean="locationService"/>
+            <ref bean="roomService"/>
+        </jaxrs:serviceBeans>
+
+        <!-- PROVIDERS -->
+        <jaxrs:providers>
+            <!-- bean class="utilities.CustomJSONProvider"/-->
+            <bean class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider"/>
+            <bean class="ted.rental.endpoints.requestFilters.AuthenticationFilter"/>
+            <bean class="ted.rental.endpoints.requestFilters.CORSFilter"/>
+            <bean class="ted.rental.exceptions.JsonParseExceptionMapper"/>
+            <ref bean="exceptionMapper"/>
+        </jaxrs:providers>
+
+    </jaxrs:server>
+
+    <!--RESOURCES-->
+    <bean id="userResource" class="ted.rental.endpoints.UserEndpoint"/>
+    <bean id="authentication" class="ted.rental.endpoints.AuthenticationEndpoint"/>
+    <bean id="roomResource" class="ted.rental.endpoints.RoomEndpoint"/>
+    <bean id="fileResource" class="ted.rental.endpoints.FileEndPoint"/>
+    <bean id="jaxRsApiApplication" class="ted.rental.endpoints.JaxRsApiApplication"/>
+    <bean id="authenticatedUserProducer" class="ted.rental.endpoints.queryParams.AuthenticatedUserProducer"/>
+
+    <!--SERVICES -->
+    <!--    <bean id="daoService" class="ted.rental.database.DataAccessObject"/>-->
+    <bean id="userService" class="ted.rental.services.UserService"/>
+    <bean id="profileService" class="ted.rental.services.ProfileService"/>
+    <bean id="locationService" class="ted.rental.services.LocationService"/>
+    <bean id="roomService" class="ted.rental.services.RoomService"/>
+    <bean id="fileService" class="ted.rental.services.FileService"/>
+
+    <!-- VALIDATION EXCEPTION MAPPER -->
+    <bean id="exceptionMapper" class="ted.rental.exceptions.ValidationExceptionMapper"/>
+
+    <!--VALIDATION PROVIDER-->
+    <bean id="validationProvider" class="org.apache.cxf.validation.BeanValidationProvider"/>
+    <bean id="validationInInterceptor" class="org.apache.cxf.jaxrs.validation.JAXRSBeanValidationInInterceptor">
+        <property name="provider" ref="validationProvider"/>
+    </bean>
+
+    <bean id="validationOutInterceptor" class="org.apache.cxf.jaxrs.validation.JAXRSBeanValidationOutInterceptor">
+        <property name="provider" ref="validationProvider"/>
+
+    </bean>
+
+</beans>

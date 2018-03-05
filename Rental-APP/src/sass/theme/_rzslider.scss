@@ -1,0 +1,25 @@
+.rzslider .rz-selection {
+  background: $primary !important;
+}
+
+.rzslider .rz-pointer {
+  background-color: $primary !important;
+}
+
+.rzslider .rz-pointer:after {
+  background: #000000 !important;
+}
+
+.rzslider .rz-bar {
+  background: #293341;
+}
+
+.rzslider .rz-bubble {
+  padding: 2px;
+  bottom: 20px;
+  color: #ccd8d8;
+}
+
+.rzslider .rz-bubble.rz-limit {
+  color: #ccd8d8;
+}

@@ -1,0 +1,93 @@
+<md-content class="md-padding" layout-xs="column" layout="column">
+    <div flex-xs flex-gt-xs="100" layout="column">
+        <md-card style="height: 635px;" md-theme-watch>
+            <md-card-content style="height: 587px; padding: 4px 16px 0px 16px; margin: 0px;">
+                <table id="roomsTable" class="display" cellspacing="0" width="100%" style="color: black;">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Type</th>
+                        <th>Title</th>
+                        <th>Overnight Price</th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th>Id</th>
+                        <th>Type</th>
+                        <th>Title</th>
+                        <th>Overnight Price</th>
+                    </tr>
+                    </tfoot>
+                    <tbody>
+                    <tr ng-repeat="room in rooms" ng-click="goToRoom(room.id)" style="cursor: pointer;">
+                        <td ng-bind="room.id"></td>
+                        <td ng-bind="room.type"></td>
+                        <td ng-bind="room.title"></td>
+                        <td ng-bind="room.overnight_price"></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </md-card-content>
+
+            <md-card-actions layout="row" layout-align="end center">
+                <md-button
+                        class="md-raised md-primary"
+                        ng-click="roomInsetDialog($event)">
+                    Insert a room
+                </md-button>
+            </md-card-actions>
+        </md-card>
+    </div>
+
+</md-content>
+<!--
+<md-content>
+        <div flex-xs flex-gt-xs="100" layout="row">
+            <div flex-xs flex-gt-xs="100" layout="column">
+                <md-card style="height: 635px" md-theme-watch>
+                    <md-card-content style="height: 530px;">
+                        <table id="reservationsTable" class="display" cellspacing="0" width="100%" style="color: black;">
+                            <thead>
+                            <tr>
+                                <th>Reservation_id</th>
+                                <th>CheckinDate</th>
+                                <th>CheckoutDate</th>
+                                <th>Guests</th>
+                                <th>Total Cost</th>
+                                <th>Renter</th>
+                                <th>Room_id</th>
+                            </tr>
+                            </thead>
+                            <tfoot>
+                            <tr>
+                                <th>Reservation_id</th>
+                                <th>CheckinDate</th>
+                                <th>CheckoutDate</th>
+                                <th>Guests</th>
+                                <th>Total Cost</th>
+                                <th>Renter</th>
+                                <th>Room_id</th>
+                            </tr>
+                            </tfoot>
+                            <tbody>
+                            <tr ng-repeat="reservation in reservations" ng-click="showReservation()">
+                                <td ng-bind="reservation.id"></td>
+                                <td ng-bind="reservation.email"></td>
+                                <td ng-bind="reservation.checkInDate"></td>
+                                <td ng-bind="reservation.checkOutDate"></td>
+                                <td ng-bind="reservation.guests"></td>
+                                <td ng-bind="reservation.total_cost"></td>
+                                <td ng-bind="reservation.renter"></td>
+                                <td ng-bind="reservation.room_id"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </md-card-content>
+                </md-card>
+            </div>
+        </div>
+</md-content>-->
+
+

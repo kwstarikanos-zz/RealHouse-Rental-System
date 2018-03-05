@@ -1,0 +1,163 @@
+<md-content class="md-padding" layout-xs="column" layout="row" style="min-height: 77vh;">
+    <div flex-xs flex-gt-xs="70" layout="column">
+        <md-card id="rooms-grid" style="height: 100%;" md-theme-watch>
+            <md-card-header style="padding: 0px;">
+                <md-toolbar>
+                    <div class="md-toolbar-tools">
+                        <md-menu>
+                            <md-button
+                                    aria-label="Residence Type"
+                                    ng-click="$mdMenu.open($event)">
+                                Type: {{types[type]}}
+                            </md-button>
+                            <md-menu-content width="1">
+                                <md-menu-item ng-repeat="item in types">
+                                    <md-button
+                                            ng-disabled="item == types[type]"
+                                            ng-click="changeType($index)">
+                                        {{item}}
+                                    </md-button>
+                                </md-menu-item>
+                            </md-menu-content>
+                        </md-menu>
+                        <md-menu>
+                            <md-button
+                                    aria-label="Residence Type"
+                                    ng-click="$mdMenu.open($event)">
+                                Beds: ≥{{beds}}
+                            </md-button>
+                            <md-menu-content width="1">
+                                <md-menu-item ng-repeat="item in [0, 1,2,3,4,5,6,7,8,9,10]">
+                                    <md-button
+                                            ng-disabled="item == beds"
+                                            ng-click="changeBeds(item)">
+                                        {{item}}
+                                    </md-button>
+                                </md-menu-item>
+                            </md-menu-content>
+                        </md-menu>
+                        <md-menu>
+
+                            <md-button
+                                    aria-label="Residences Per Page"
+                                    ng-click="$mdMenu.open($event)">
+                                <!--<md-icon md-menu-origin md-svg-src="/assets/img/circle-sizes.svg"></md-icon>-->
+                                Residences/page: {{size}}
+                            </md-button>
+                            <md-menu-content width="1">
+                                <md-menu-item
+                                        ng-repeat="item in [1, 2, 4, 8,16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192]">
+                                    <md-button
+                                            ng-disabled="item == size"
+                                            ng-click="changeSize(item)">
+                                        {{item}}
+                                    </md-button>
+                                </md-menu-item>
+                            </md-menu-content>
+                        </md-menu>
+                    </div>
+                    <div class="md-toolbar-tools">
+                        <rzslider
+                                rz-slider-model="slider_translate.minValue"
+                                rz-slider-high="slider_translate.maxValue"
+                                rz-slider-options="slider_translate.options"
+                        >
+                        </rzslider>
+                    </div>
+                </md-toolbar>
+            </md-card-header>
+            <md-card-content style="height: 630px; overflow: overlay;">
+                <md-grid-list md-cols-gt-md="4" md-cols-md="2" md-cols-sm="1" md-gutter="12px" md-row-height="1:1">
+                    <md-grid-tile
+                            ng-class="{ 'selected-tile': prev_infowindow === room.infowindow}"
+                            ng-repeat="room in rooms"
+                            style="background-color: rgb(34, 42, 53);"
+                            ng-click="openInfoWindow(room)"
+                    >
+                        <md-grid-tile-header ng-click="goToRoom(room.id)" class="unselectable"
+                                             style="margin: 3px; z-index: 1;">
+                            <h3><strong>{{room.title}}</strong></h3>
+                            <h4><sub>By {{room.owner}}</sub></h4>
+                        </md-grid-tile-header>
+                        <slider size="thumbnail" images="room.pictures" controls="true"></slider>
+                        <md-grid-tile-footer style="padding: 0 10px; margin: 3px;" class="unselectable">
+                            <!-- <h3><strong>{{room.title}}</strong></h3>-->
+                            <strong class="room-type" ng-if="room.type == 'full_house'">Full House</strong>
+                            <strong class="room-type" ng-if="room.type == 'private_room'">Private Room</strong>
+                            <strong class="room-type" ng-if="room.type == 'public_room'">Public Room</strong>
+                            &nbsp;
+                            <strong>{{room.beds}} beds</strong>
+                            <md-icon ng-repeat="a in room.amenities" class="amenity-icon"
+                                     md-svg-icon="/assets/img/{{a.amenity}}.svg">&nbsp;
+                            </md-icon>
+                            <br/>
+                            <span star-rating rating-value="room.ratingStars" max="5"></span>
+                            <span>{{room.reviews}} reviews - Price <strong>€{{room.overnight_price}}</strong></span>
+                        </md-grid-tile-footer>
+                    </md-grid-tile>
+                </md-grid-list>
+            </md-card-content>
+            <md-card-footer style="padding: 0px;">
+                <md-toolbar flex="none">
+                    <div layout="row" layout-align="center" flex>
+                        <!-- pager -->
+                        <ul ng-if="pager.pages.length" class="pagination">
+                            <li>
+                                <md-button
+                                        style="min-width: 40px;"
+                                        ng-disabled="pager.currentPage === 1"
+                                        ng-click="setPage(1)">
+                                    First
+                                    <!--<md-icon md-menu-origin md-svg-src="/assets/img/first-arrow-pager.svg"></md-icon>-->
+                                </md-button>
+                            </li>
+                            <li>
+                                <md-button
+                                        style="min-width: 40px;"
+                                        ng-disabled="pager.currentPage === 1"
+                                        ng-click="setPage(pager.currentPage - 1)">
+                                    &#129092;
+                                    <!-- <md-icon md-menu-origin md-svg-src="/assets/img/left-arrow-pager.svg"></md-icon>-->
+                                </md-button>
+                            </li>
+                            <li ng-repeat="page in pager.pages">
+                                <md-button
+                                        style="min-width: 40px; font-weight: bolder;"
+                                        ng-disabled="pager.currentPage === page"
+                                        ng-click="setPage(page)"
+                                        ng-class="{ 'md-raised md-warn': (pager.currentPage === page) }"
+                                >{{page}}
+                                </md-button>
+                            </li>
+                            <li>
+                                <md-button
+                                        style="min-width: 40px;"
+                                        ng-disabled="pager.currentPage === pager.totalPages"
+                                        ng-click="setPage(pager.currentPage + 1)">
+                                    &#129094;
+                                    <!-- <md-icon md-menu-origin md-svg-src="/assets/img/right-arrow-pager.svg"></md-icon>-->
+                                </md-button>
+                            </li>
+                            <li>
+                                <md-button
+                                        style="min-width: 40px;"
+                                        ng-disabled="pager.currentPage === pager.totalPages"
+                                        ng-click="setPage(pager.totalPages)">
+                                    Last
+                                    <!--<md-icon md-menu-origin md-svg-src="/assets/img/last-arrow-pager.svg"></md-icon>-->
+                                </md-button>
+                            </li>
+                        </ul>
+                    </div>
+                </md-toolbar>
+            </md-card-footer>
+        </md-card>
+    </div>
+    <div flex-xs flex-gt-xs="30" layout="column">
+        <md-card style="height: 100%;" md-theme-watch>
+            <md-card-content style="height: 700px;" id="rooms-map">
+                30% RIGHT CONTENT
+            </md-card-content>
+        </md-card>
+    </div>
+</md-content>

@@ -1,0 +1,255 @@
+<md-content class="md-padding">
+    <div layout-xs="row" layout="row">
+        <div flex-xs flex-gt-xs="80" layout="column">
+            <md-card style="height: 670px;" md-theme-watch>
+                <md-card-title>
+                    <md-card-title-text>
+                        <h3>··· <strong flex ng-if="room.type.type == 'full_house'">Full House</strong>
+                            <strong flex ng-if="room.type.type == 'private_room'">Private Room</strong>
+                            <strong flex ng-if="room.type.type == 'public_room'">Public Room</strong> ··· {{room.title}}
+                            · {{room.location.locality || room.location.administrative_area_level_3 ||
+                            room.location.administrative_area_level_2 ||
+                            room.location.administrative_area_level_1
+                            || room.location.administrative_area_level_4 ||
+                            room.location.administrative_area_level_5}}, {{room.location.country}},
+                            {{room.reviews.length}} reviews ···
+                            <md-icon ng-repeat="amenity in room.amenities"
+                                     class="amenity-icon"
+                                     md-svg-icon="/assets/img/{{amenity.amenity}}.svg"
+                            >
+                            </md-icon>
+                        </h3>
+                    </md-card-title-text>
+                </md-card-title>
+                <md-card-content style="height: 93%;">
+                    <slider size="original" images="room.pictures" controls="true"></slider>
+                </md-card-content>
+            </md-card>
+        </div>
+        <div flex-xs flex-gt-xs="20" layout="column">
+            <md-card style="height: 200px;" md-theme-watch>
+                <md-card-title style="height: 72px;">
+                    <md-card-title-text>
+                        <h5>Owner: {{room.profile.owner}}</h5>
+                    </md-card-title-text>
+                </md-card-title>
+                <md-card-content style="height: 530px;">
+                    <div flex flex-xs flex-gt-xs="20">
+                        <img style="height: 130px; width: 130px; border-radius: 50%;" ng-src="{{ownerPicture}}"
+                             class="md-card-image"
+                             alt="Profile picture"
+                             ng-click="goToProfile(room.profile.owner)"
+                        >
+                    </div>
+                </md-card-content>
+            </md-card>
+            <md-card style="height: 454px;" md-theme-watch>
+                <md-card-title style="height: 72px;">
+                    <md-card-title-text>
+                        <span class="md-headline">From €{{room.overnight_price}} per night...</span>
+                    </md-card-title-text>
+                </md-card-title>
+                <md-card-content>
+
+                    <div layout="row" style="height: 388px !important;" class="profileRowForAdmin">
+                        <div flex>
+                            <div layout="row" style="padding: 4px;  margin: 4px; background-color: #293341">
+                                <md-icon md-svg-src="/assets/img/school-calendar.svg"></md-icon>
+                                <input
+                                        id="searchBarDateRangePicker"
+                                        class="date-picker"
+                                        date-range-picker
+                                        name="daterange2"
+                                        type="text"
+                                        placeholder="Checkin Date - Checkout Date"
+                                        style="width: 188px; transition: width 0.3s; background-color: #293341;"
+                                        ng-model="dateInterval"
+                                        options="datepickerOptions"
+                                        required
+                                />
+                            </div>
+                            <div layout="row" style="padding: 4px;  margin: 4px; background-color: #293341">
+                                <md-icon md-svg-src="/assets/img/graduate-student-avatar.svg"></md-icon>
+                                <input
+                                        id="searchBarVisitors"
+                                        name="visitors"
+                                        type="number"
+                                        placeholder="Visitors..."
+                                        min="1"
+                                        value="1"
+                                        max="{{maxPeople}}"
+                                        style="width: 100px; transition: width 0.3s; background-color: #293341;"
+                                        ng-model="visitors"
+                                        required
+                                />
+                                <ng-messages
+                                ="visitors.$error" role="alert" aria-live="assertive">
+                                <ng-message when="required">Required!</ng-message>
+                                <ng-message when="min">More than one guest!</ng-message>
+                                <ng-message when="max">Less than {{maxPeople}} guests!</ng-message>
+                                </ng-messages>
+                            </div>
+                            <div layout="row" style="padding: 4px;  margin: 4px; background-color: #293341">
+                                <div flex> {{room.overnight_price}} € x {{days}} nights</div>
+                                <div flex> Total Cost: {{totalCost}} €</div>
+                            </div>
+                            <div layout="row" style="padding: 4px;  margin: 4px; background-color: #293341">
+                                <md-button class="md-raised md-primary" ng-click="reserveRoom()">Book</md-button>
+                            </div>
+                        </div>
+                    </div>
+
+                </md-card-content>
+            </md-card>
+        </div>
+    </div>
+    <div layout-xs="row" layout="row">
+        <div flex-xs flex-gt-xs="80" layout="column">
+            <md-card layout="column">
+                <div flex>
+                    <md-card-title>
+                        <md-card-title-text>
+                            <h3>About this listing</h3>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content>
+                        <div flex>
+                            <div>
+                                <h5 ng-bind="room.description"></h5>
+                            </div>
+                        </div>
+                    </md-card-content>
+                </div>
+            </md-card>
+            <md-card layout="column">
+                <div flex>
+                    <md-card-title>
+                        <md-card-title-text>
+                            <h3>Neighborhood</h3>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content>
+                        <!--Neighborhood-->
+                        <div layout="row">
+                            <h5>{{room.neightborhood}}</h5>
+                        </div>
+                    </md-card-content>
+                </div>
+            </md-card>
+            <md-card layout="column">
+                <div flex>
+                    <md-card-title>
+                        <md-card-title-text>
+                            <h3>Transportation</h3>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content>
+                        <strong>{{room.transport}}</strong>
+                    </md-card-content>
+                </div>
+            </md-card>
+        </div>
+        <div flex-xs flex-gt-xs="20" layout="column">
+            <md-card layout="column">
+                <div flex>
+                    <md-card-title>
+                        <md-card-title-text>
+                            <h3>The space</h3>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content>
+                        <!--The space-->
+                        <div flex layout="column" flex-xs>
+                            <div flex>
+                                <div layout="row">
+                                    <div flex flex-xs flex-gt-xs="70" layout="row">
+                                        <div flex>
+                                            <md-icon class="amenity-icon"
+                                                     md-svg-icon="/assets/img/guests.svg"></md-icon>
+                                            <div>Guests: {{room.max_people}}</div>
+                                            <md-icon class="amenity-icon"
+                                                     md-svg-icon="/assets/img/bathroom.svg"></md-icon>
+                                            <div> Bathrooms: {{room.bathrooms}}</div>
+                                        </div>
+                                        <div flex>
+                                            <md-icon class="amenity-icon"
+                                                     md-svg-icon="/assets/img/bedroom.svg"></md-icon>
+                                            <div>Bedrooms: {{room.bedrooms}}</div>
+                                            <md-icon class="amenity-icon"
+                                                     md-svg-icon="/assets/img/bed.svg"></md-icon>
+                                            <div>Beds: {{room.beds}}</div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </md-card-content>
+                </div>
+            </md-card>
+            <md-card layout="column">
+                <div flex>
+                    <md-card-title>
+                        <md-card-title-text>
+                            <h3>Prices</h3>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content>
+                        <!--Prices-->
+                        <div layout="row">
+                            <div flex flex-xs flex-gt-xs="80" layout="column">
+                                <strong flex flex-xs flex-gt-xs="50">Overnight price is: {{room.overnight_price}}
+                                    € </strong>
+                                <strong flex flex-xs flex-gt-xs="50">Extra price per person is:
+                                    {{room.exta_person_price}} €
+                                </strong>
+                            </div>
+                        </div>
+                    </md-card-content>
+                </div>
+            </md-card>
+            <md-card layout="column">
+                <div flex>
+                    <md-card-title>
+                        <md-card-title-text>
+                            <h3>Amenities</h3>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content>
+                        <div ng-repeat="amenity in room.amenities">
+                            <strong flex flex-xs flex-gt-xs="50" >{{amenity.amenity}}</strong>
+                            <md-icon
+                                     class="amenity-icon"
+                                     md-svg-icon="/assets/img/{{amenity.amenity}}.svg"
+                            >
+                            </md-icon>
+                        </div>
+
+
+
+                    </md-card-content>
+                </div>
+            </md-card>
+            <md-card layout="column">
+                <div flex>
+                    <md-card-title>
+                        <md-card-title-text>
+                            <h3>House rules</h3>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content>
+                        <!--House Rules-->
+                        <div layout="row">
+                            <div flex flex-xs flex-gt-xs="90" layout="column">
+                                <div flex ng-repeat="rule in room.rules" layout="column">
+                                    {{rule.rule}}
+                                </div>
+                                <div flex>extra rules: {{room.house_rules}}</div>
+                            </div>
+                        </div>
+                    </md-card-content>
+                </div>
+            </md-card>
+        </div>
+    </div>
+</md-content>

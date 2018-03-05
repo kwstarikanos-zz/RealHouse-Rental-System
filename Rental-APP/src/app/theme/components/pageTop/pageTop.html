@@ -1,0 +1,160 @@
+<div class="page-top clearfix" scroll-position="scrolled" max-height="50" ng-class="{'scrolled': scrolled}">
+
+    <a href="#/residences" class="al-logo clearfix">
+        <img src="/assets/img/house2.png" style="margin-bottom: 5px;">
+        <span>Real</span>House
+    </a>
+
+    <a href class="collapse-menu-link ion-navicon" ba-sidebar-toggle-menu></a>
+
+    <!--Search Form-->
+    <form class="search">
+        <div style="float:left; border-top-left-radius: 4px; border-bottom-left-radius: 4px;">
+            <md-icon md-svg-src="/assets/img/magnifier.svg"></md-icon>
+            <input
+                    id="searchBarFormattedAddress"
+                    class=""
+                    name="formatted_address"
+                    type="text"
+                    placeholder="Anywhere..."
+                    ng-model="data.address.formatted_address"
+                    ng-minlength="4"
+                    googleplace
+                    autocomplete="on"
+                    aria-invalid="false"
+                    style="width: 190px; margin-left: 2px; transition: width 0.3s"
+            >
+            <md-button
+                    class="md-warn field-reset-icon"
+                    style="min-width: 5px; width: 27px;"
+                    ng-hide="!data.address.formatted_address"
+                    type="button"
+                    ng-click="clear(0)"
+                    aria-label="Clear"
+            >
+                <md-icon md-svg-src="/assets/img/clear.svg" class="field-reset-icon"></md-icon>
+            </md-button>
+            <div class="bottomInputLine"></div>
+        </div>
+        <div style="float:left;">
+
+
+            <md-icon md-svg-src="/assets/img/school-calendar.svg"></md-icon>
+            <input
+                    id="searchBarDateRangePicker"
+                    class="date-picker"
+                    date-range-picker
+                    name="daterange2"
+                    type="text"
+                    placeholder="Anytime..."
+                    style="width: 188px; transition: width 0.3s"
+                    ng-model="dateInterval"
+                    options="datepickerOptions"
+                    required
+            />
+            <md-button
+                    class="md-warn field-reset-icon"
+                    style="min-width: 5px; width: 27px;"
+                    ng-hide="!(dateInterval.startDate && dateInterval.endDate)"
+                    type="button"
+                    ng-click="clear(1)"
+                    aria-label="Clear"
+            >
+                <md-icon md-svg-src="/assets/img/clear.svg" class="field-reset-icon"></md-icon>
+            </md-button>
+            <div class="bottomInputLine"></div>
+        </div>
+        <div style="float:left; border-top-right-radius: 4px; border-bottom-right-radius: 4px;">
+            <md-icon md-svg-src="/assets/img/graduate-student-avatar.svg"></md-icon>
+            <input
+                    id="searchBarVisitors"
+                    class=""
+                    name="visitors"
+                    type="number"
+                    placeholder="Visitors..."
+                    min="1"
+                    max="{{maxPeople}}"
+                    style="width: 100px; transition: width 0.3s"
+                    ng-model="searchData.visitors"
+                    required
+            />
+            <md-button
+                    class="md-warn field-reset-icon"
+                    style="min-width: 5px; width: 27px;"
+                    ng-hide="!searchData.visitors"
+                    type="button"
+                    ng-click="clear(2)"
+                    aria-label="Clear"
+            >
+                <md-icon md-svg-src="/assets/img/clear.svg" class="field-reset-icon"></md-icon>
+            </md-button>
+            <div class="bottomInputLine"></div>
+        </div>
+    </form>
+
+    <!--Login Form-->
+    <ul id="signInDropdown" class="nav navbar-nav navbar-right" ng-if="!loggedIn">
+        <li class="dropdown">
+            <button type="button" id="dropdownMenu1" data-toggle="dropdown"
+                    class="btn btn-default navbar-btn dropdown-toggle">
+                <i ng-class="{'fa': true, 'fa fa-cog fa-spin': dataLoading, 'fa fa-sign-in': !dataLoading }"></i>
+                Sign in<span class="caret"></span></button>
+            <ul class="dropdown-menu dropDownOptions">
+                <li>
+                    <form name="loginform" ng-submit="login()" role="form">
+                        <div class="form-group"
+                             ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
+                            <input type="text" placeholder="username" name="username" id="username" class="form-control"
+                                   ng-model="credentials.username"
+                                   required/>
+                            <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
+                        </div>
+                        <div class="form-group"
+                             ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
+                            <input type="password" placeholder="password" name="password" id="password"
+                                   class="form-control" ng-model="credentials.password"
+                                   required/>
+                            <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+                        </div>
+                        <div class="form-actions" style="width: 100%;">
+                            <!--Submit Button-->
+                            <button style="float: right"
+                                    ng-disabled="dataLoading || loginform.$invalid || loginform.$pending"
+                                    ng-class="{ 'btn': true, 'btn-success': loginform.$valid, 'btn-warning': loginform.$invalid }">
+                                Login
+                                <i ng-class="{'fa': true, 'fa fa-cog fa-spin': dataLoading, 'fa fa-sign-in': !dataLoading }"></i>
+                            </button>
+                        </div>
+                    </form>
+                    <div style="margin-top: 10px; float:right;">
+                        <div style="font-size:85%">
+                            Don't have an account yet ?
+                            <a href="" ng-click="signUpDialog($event)">Sign up!</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+    <!--Logged In User Dropdown menu-->
+    <ul class="nav navbar-nav navbar-right" ng-if="loggedIn">
+        <li class="dropdown">
+            <button type="button"
+                    data-toggle="dropdown"
+                    style="color: #ffffff;"
+                    class="btn btn-default navbar-btn dropdown-toggle">
+                <i class="fa fa-user"></i>
+                {{username}}
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu dropDownOptions" style="width: 160px;">
+                <li ng-if="!admin"><a href="#" ng-click="goToProfile()"><i class="fa fa-user"></i> Profile</a></li>
+                <li><a href="#/settings"><i class="fa fa-gear"></i> Settings</a></li>
+                <li class="divider"></li>
+                <li><a href="#" ng-click="logout()"><i class="fa fa-power-off"></i> Log Out</a></li>
+            </ul>
+        </li>
+    </ul>
+
+</div>

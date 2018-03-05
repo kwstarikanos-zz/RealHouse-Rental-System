@@ -1,0 +1,8 @@
+<div style="margin: 0 auto;"
+     class="alert fade in"
+     ng-class="{'alert-info': Alert.type === 'info','alert-success': Alert.type === 'success','alert-warning': Alert.type === 'warning','alert-danger': Alert.type === 'danger'}"
+     ng-if="Alert"
+>
+    <a ng-if="Alert.closable" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <div dynamic="Alert.message"></div>
+</div>

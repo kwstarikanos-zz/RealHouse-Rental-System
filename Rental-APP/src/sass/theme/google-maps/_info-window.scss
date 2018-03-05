@@ -1,0 +1,53 @@
+/*style the box*/
+.gm-style .gm-style-iw {
+  top: 0 !important;
+  left: 1px !important;
+  width: 200px !important;
+  height: 208px !important;
+  min-height: 152px !important;
+  padding: 11px;
+  display: block !important;
+}
+
+/*style the p tag*/
+.gm-style .gm-style-iw #google-popup p {
+  padding: 10px;
+}
+
+/*style the arrow*/
+.gm-style div div div div div div div div {
+  padding: 0;
+  margin: 0;
+  padding: 0;
+  top: 0;
+  color: #fff;
+  font-size: 16px;
+}
+
+/*style the link*/
+.gm-style div div div div div div div div a {
+  color: #f1f1f1;
+  font-weight: bold;
+}
+
+#rooms-map > div > div > div:nth-child(1) > div:nth-child(4) > div:nth-child(4) > div > div:nth-child(1) > div:nth-child(2) {
+  width: 200px !important;
+}
+
+#rooms-map > div > div > div:nth-child(1) > div:nth-child(4) > div:nth-child(4) > div > div:nth-child(3) {
+  right: 42px !important;
+}
+
+#rooms-map > div > div > div:nth-child(1) > div:nth-child(4) > div:nth-child(4) > div > div:nth-child(1) > div:nth-child(4) {
+  width: 200px !important;
+}
+
+#rooms-map > div > div > div:nth-child(1) > div:nth-child(4) > div:nth-child(4) > div > div.gm-style-iw > div:nth-child(1) {
+  height: 221px;
+}
+
+#rooms-map > div > div > div:nth-child(1) > div:nth-child(4) > div:nth-child(4) > div > div.gm-style-iw > div:nth-child(1) > div {
+  height: 192px;
+  width: 180px;
+  color: black;
+}

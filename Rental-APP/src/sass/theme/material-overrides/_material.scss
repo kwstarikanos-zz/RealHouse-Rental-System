@@ -1,0 +1,181 @@
+md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar) {
+  background-color: #1e2a35 !important;
+  color: #d8d8d8 !important;
+}
+
+md-toolbar.md-default-theme.md-hue-2:not(.md-menu-toolbar), md-toolbar.md-hue-2:not(.md-menu-toolbar) {
+  background-color: rgb(40, 53, 147) !important;;
+  color: rgba(255, 255, 255, 0.87) !important;
+}
+
+md-tabs.md-default-theme md-ink-bar, md-tabs md-ink-bar {
+  color: $primary;
+  background: $primary;
+}
+
+.md-padding {
+  padding: 0px;
+}
+
+md-content.md-default-theme, md-content {
+  color: white !important;
+  background-color: #293341 !important;
+  box-shadow: 0px 0px 2px 0px #293341;
+}
+
+md-switch.md-default-theme.md-checked.md-primary .md-bar, md-switch.md-checked.md-primary .md-bar {
+  background-color: rgb(54, 88, 87);
+}
+
+md-switch.md-default-theme.md-checked.md-primary .md-thumb, md-switch.md-checked.md-primary .md-thumb {
+  background-color: rgb(139, 195, 74);
+}
+
+md-tabs.md-default-theme md-tabs-wrapper, md-tabs md-tabs-wrapper {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+md-progress-linear.md-default-theme .md-container, md-progress-linear .md-container {
+  background-color: rgba(255, 255, 255, 0);
+}
+
+md-icon.md-default-theme, md-icon {
+  color: rgb(255, 255, 255);
+}
+
+.md-default-theme .md-datepicker-input-container, .md-datepicker-input-container {
+  border-bottom-color: rgba(0, 0, 0, 0);
+}
+
+md-tabs.md-default-theme .md-tab.md-active, md-tabs .md-tab.md-active, md-tabs.md-default-theme .md-tab.md-active md-icon, md-tabs .md-tab.md-active md-icon, md-tabs.md-default-theme .md-tab.md-focused, md-tabs .md-tab.md-focused, md-tabs.md-default-theme .md-tab.md-focused md-icon, md-tabs .md-tab.md-focused md-icon {
+  color: $primary;
+}
+
+.md-button.md-default-theme.md-fab[disabled], .md-button.md-fab[disabled], .md-button.md-default-theme.md-raised[disabled], .md-button.md-raised[disabled] {
+  background-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+/*.md-button.md-default-theme.md-primary.md-fab, .md-button.md-primary.md-fab, .md-button.md-default-theme.md-primary.md-raised, .md-button.md-primary.md-raised {
+  color: rgba(255, 255, 255, 0.87);
+  background-color: $primary;
+}*/
+
+md-card.md-default-theme, md-card {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.06);
+  border-radius: 2px;
+}
+
+md-card.md-default-theme md-card-header md-card-header-text .md-subhead, md-card md-card-header md-card-header-text .md-subhead, md-card.md-default-theme md-card-title md-card-title-text:not(:only-child) .md-subhead, md-card md-card-title md-card-title-text:not(:only-child) .md-subhead {
+  color: #74979b;
+}
+
+md-dialog.md-default-theme, md-dialog {
+  border-radius: 4px;
+  background-color: rgb(41, 51, 65);
+  color: rgba(255, 255, 255, 1.0);
+}
+
+md-card md-card-content::-webkit-scrollbar-thumb {
+  background-color: $primary;
+}
+
+md-toolbar {
+  min-height: 40px;
+}
+
+.md-toolbar-tools {
+  height: 40px;
+  max-height: 40px;
+}
+
+md-input-container.md-default-theme:not(.md-input-invalid).md-input-focused label, md-input-container:not(.md-input-invalid).md-input-focused label, md-input-container.md-default-theme:not(.md-input-invalid).md-input-focused md-icon, md-input-container:not(.md-input-invalid).md-input-focused md-icon {
+  color: $primary;
+}
+
+md-input-container.md-default-theme:not(.md-input-invalid).md-input-focused .md-input, md-input-container:not(.md-input-invalid).md-input-focused .md-input, md-input-container.md-default-theme:not(.md-input-invalid).md-input-resized .md-input, md-input-container:not(.md-input-invalid).md-input-resized .md-input {
+  border-color: rgb(139, 195, 74);
+}
+
+md-input-container.md-default-theme.md-input-invalid .md-input, md-input-container.md-input-invalid .md-input {
+  border-color: $primary;
+}
+
+md-input-container.md-default-theme.md-input-invalid .md-char-counter, md-input-container.md-input-invalid .md-char-counter, md-input-container.md-default-theme.md-input-invalid .md-input-message-animation, md-input-container.md-input-invalid .md-input-message-animation, md-input-container.md-default-theme.md-input-invalid label, md-input-container.md-input-invalid label {
+  color: $primary;
+}
+
+md-select.md-default-theme.ng-invalid.ng-touched .md-select-value, md-select.ng-invalid.ng-touched .md-select-value {
+  color: $primary !important;
+  border-bottom-color: $primary !important;
+}
+
+md-input-container.md-input-invalid md-select.md-default-theme .md-select-value, md-input-container.md-input-invalid md-select .md-select-value {
+  color: $primary !important;
+  border-bottom-color: $primary !important;
+}
+
+md-select-menu.md-default-theme md-content md-option:not([disabled]):focus, md-select-menu md-content md-option:not([disabled]):focus, md-select-menu.md-default-theme md-content md-option:not([disabled]):hover, md-select-menu md-content md-option:not([disabled]):hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+md-select-menu.md-default-theme md-content md-option, md-select-menu md-content md-option {
+  color: rgb(101, 134, 142) !important;
+}
+
+md-select-menu.md-default-theme md-content md-option[selected], md-select-menu md-content md-option[selected] {
+  color: $primary !important;
+}
+
+md-input-container.md-input-focused:not(.md-input-has-value) md-select.md-default-theme .md-select-value, md-input-container.md-input-focused:not(.md-input-has-value) md-select .md-select-value, md-input-container.md-input-focused:not(.md-input-has-value) md-select.md-default-theme .md-select-value.md-select-placeholder, md-input-container.md-input-focused:not(.md-input-has-value) md-select .md-select-value.md-select-placeholder {
+  color: $primary !important;
+}
+
+md-select.md-default-theme:not([disabled]):focus .md-select-value, md-select:not([disabled]):focus .md-select-value {
+  border-bottom-color: $primary !important;
+}
+
+md-grid-list md-grid-tile md-grid-tile-header, md-grid-list md-grid-tile md-grid-tile-footer {
+  height: 65px !important;
+}
+
+md-grid-list md-grid-tile {
+  background-color: rgb(41, 53, 66) !important;
+}
+
+md-card md-card-content {
+  padding: 5px !important;
+}
+
+.md-dialog-container {
+  background: rgba(0, 0, 0, 0.55) !important;
+}
+
+.md-dialog-container {
+  z-index: 1000 !important;
+}
+
+.md-datepicker-calendar-pane {
+  z-index: 1000 !important;
+}
+
+.md-select-menu-container {
+  z-index: 1000 !important;
+}
+
+md-menu-content.md-default-theme, md-menu-content {
+  background-color: rgb(41, 51, 65) !important;
+}
+
+md-menu-content.md-default-theme md-menu-item, md-menu-content md-menu-item {
+  color: #d8d8d8 !important
+}
+
+/*.md-toolbar-tools {
+  display: block;
+}*/
+
+md-menu-content.md-default-theme md-menu-item .md-button[disabled], md-menu-content md-menu-item .md-button[disabled], md-menu-content.md-default-theme md-menu-item .md-button[disabled] md-icon, md-menu-content md-menu-item .md-button[disabled] md-icon {
+  color: $primary !important
+}

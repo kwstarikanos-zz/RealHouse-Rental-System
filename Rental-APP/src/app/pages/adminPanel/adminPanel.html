@@ -1,0 +1,112 @@
+<md-content class="md-padding" layout-xs="column" layout="row">
+    <div flex-xs flex-gt-xs="55" layout="column">
+        <md-card style="height: 765px;" md-theme-watch>
+            <md-card-content style="height: 760px;">
+                <table id="usersTable" class="display" cellspacing="0" width="100%" style="color: black;">
+                    <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Confirmed</th>
+                        <th>Created</th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Confirmed</th>
+                        <th>Created</th>
+                    </tr>
+                    </tfoot>
+                    <tbody>
+                    <tr ng-repeat="user in users" ng-click="showProfile(user)">
+                        <td ng-bind="user.username"></td>
+                        <td ng-bind="user.email"></td>
+                        <td ng-bind="user.role"></td>
+                        <td ng-bind="user.confirmed"></td>
+                        <td ng-bind="user.created"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </md-card-content>
+        </md-card>
+    </div>
+    <div flex-xs flex-gt-xs="45" layout="column">
+        <md-card style="height: 765px;" md-theme-watch>
+            <md-card-title style="height: 72px;">
+                <md-card-title-text>
+                    <span class="md-headline">User:&nbsp;{{profile.owner}}</span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content style="height: 760px;">
+                <div layout="row" class="profileRowForAdmin" style="height: 635px !important;">
+                    <div flex flex-gt-xs="60">
+
+                        <div layout="row" style="padding: 4px;">
+                            <div id="profile-map" style="min-height: 435px; width: 100%;"></div>
+                        </div>
+                        <div layout="row" style="padding: 4px;">
+                            Address:&nbsp;<span ng-bind="profile.location.formatted_address"></span>
+                        </div>
+                    </div>
+                    <div flex flex-gt-xs="40">
+                        <div layout="row" class="profilePictureRowForAdmin">
+                            <img style="min-width: 280px;" ng-src="{{picture}}" class="md-card-image"
+                                 alt="Profile picture">
+                        </div>
+
+                        <div layout="row" style="padding: 4px;  margin: 4px; background-color: #293341">
+                            FullName:&nbsp;<span>{{profile.firstname}} {{profile.lastname}}</span>
+                        </div>
+
+                        <div layout="row" style="padding: 4px;  margin: 4px; background-color: #293341">
+                            Birthday:&nbsp;<span ng-bind="profile.birthday"></span>
+                        </div>
+
+                        <div layout="row" style="padding: 4px;  margin: 4px; background-color: #293341">
+                            Phone:&nbsp;<span ng-bind="profile.phone"></span>
+                        </div>
+                        <div layout="row" style="padding: 4px;  margin: 4px; background-color: #293341">
+                            <md-button class="md-primary pull-right" type="button" ng-click="generateProfilePdf();">
+                                PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                            </md-button>
+                        </div>
+                    </div>
+                </div>
+                <md-button
+                        class="md-warn pull-left"
+                        type="button"
+                        ng-show="!admin"
+                        ng-click="deleteUserDialog($event);"
+                >
+                    DELETE USER
+                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                </md-button>
+
+                <md-button
+                        class="md-raised md-primary pull-right"
+                        type="button"
+                        ng-show="host || !admin"
+                        ng-click="goToProfile(profile.owner)"
+                >
+                    GO TO PROFILE
+                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                </md-button>
+
+                <md-button
+                        class="md-raised md-primary pull-right"
+                        type="button"
+                        ng-show="host"
+                        ng-disabled="confirmed"
+                        ng-click="confirmUserDialog($event);"
+                >
+                    CONFIRM HOST
+                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                </md-button>
+            </md-card-content>
+        </md-card>
+    </div>
+</md-content>

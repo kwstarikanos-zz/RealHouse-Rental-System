@@ -1,0 +1,55 @@
+<md-content class="md-padding">
+    <div layout-xs="row" layout="row">
+        <div flex-xs flex-gt-xs="20" layout="column">
+            <md-card md-theme-watch>
+                <md-card-content style="height: 100%;">
+                    <div layout="row" class="profilePictureRowForAdmin">
+                        <img style="min-width: 280px;" ng-src="{{picture}}" class="md-card-image"
+                             alt="Profile picture">
+                    </div>
+                </md-card-content>
+            </md-card>
+            <md-card md-theme-watch>
+                <md-card-content style="height: 100%;">
+                    <h3>{{profile.owner}}</h3>
+                    <h4>You can find me at:</h4>
+                    <h5>Phone: {{profile.phone}}</h5>
+                    <h5>Email: {{user.email}}</h5>
+                </md-card-content>
+            </md-card>
+        </div>
+        <div flex-xs flex-gt-xs="80" layout="column">
+            <md-card style="height: 372px;" md-theme-watch>
+                <md-card-title style="height: 72px;">
+                    <md-card-title-text>
+                        <h3>Hello I'm {{profile.firstname}} {{profile.lastname}}!</h3>
+                        <h4>I live in {{profile.location.locality || profile.location.administrative_area_level_3 ||
+                            profile.location.administrative_area_level_2 || profile.location.administrative_area_level_1
+                            || profile.location.administrative_area_level_4 ||
+                            profile.location.administrative_area_level_5}}, {{profile.location.country}} and I'm
+                            {{profile.birthday | ageFilter}} years old!</h4>
+                    </md-card-title-text>
+                </md-card-title>
+                <md-card-content style="height: 530px;">
+                    <br>
+                </md-card-content>
+            </md-card>
+        </div>
+    </div>
+
+    <div flex-xs flex-gt-xs="100" layout="column">
+        <md-card layout="column">
+            <div flex>
+                <md-card-title>
+                    <md-card-title-text>
+                        <h3>Users say about me...</h3>
+                    </md-card-title-text>
+                </md-card-title>
+                <md-card-content>
+
+
+                </md-card-content>
+            </div>
+        </md-card>
+    </div>
+</md-content>

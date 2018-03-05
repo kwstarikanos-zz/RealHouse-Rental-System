@@ -1,0 +1,19 @@
+.rating {
+  color: #a9a9a9;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+}
+ul.rating {
+  display: inline-block;
+}
+.rating li {
+  list-style-type: none;
+  display: inline-block;
+  padding: 1px;
+  text-align: center;
+  font-weight: bold;
+}
+.rating .filled {
+  color: #FFEB3B;
+}

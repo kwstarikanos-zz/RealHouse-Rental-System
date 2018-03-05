@@ -1,0 +1,43 @@
+
+.dropDownOptions {
+  top: 66px;
+  background-color: #0f151a !important;
+  padding: 15px;
+  width: 222px;
+  border-top: 0px;
+  border-left: 1px;
+  border-right: 1px;
+  border-bottom: 1px;
+  border-style: solid;
+  border-color: #1e2a35;
+  border-top: 1px solid #000000;
+}
+
+.dropdown-menu .divider {
+  height: 1px;
+  margin: 5px 0;
+  overflow: hidden;
+  background-color: #4c4c49;
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+  color: $primary;
+  text-decoration: none;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.dropdown-menu > li > a {
+  display: block;
+  padding: 5px 20px;
+  clear: both;
+  font-weight: normal;
+  line-height: 1.42857143;
+  color: rgb(255, 255, 255);
+  white-space: nowrap;
+  font-size: 15px;
+}
+
+
+.login-form-group {
+  margin: 2px;
+}

@@ -1,0 +1,49 @@
+$default: rgba(255, 255, 255, 0.20); //rgba(#000000, 0.8); //Panel background color
+$body-bg: #3f5b71; // Body background color
+$default-text: #ffffff; // Default text color
+$help-text: #eeeeee; // Default subtext color
+$label-text: #ffffff; // Text for labels in forms (Basically it should be equal to default-text in most cases)
+
+$disabled: #dddddd;
+$disabled-bg: transparent;
+$border: #ffffff;
+$border-light: rgba(#ffffff, 0.2);
+$input-border: transparent;
+$input-background: rgba(#000000, 0.15);
+
+$sidebar: rgba(#000000, 0.7);
+$sidebar-text: #ffffff;
+$dropdown-text: #7d7d7d;
+$bootstrap-panel-text: #7d7d7d;
+$bootstrap-panel-bg: #ffffff;
+$mail-box: whitesmoke;
+$auth-panel-background: rgba(#000000, 0.55);
+$progress-background: rgba(#000000, 0.15);
+$progress-default: #ffffff;
+
+$bg-color: #1e2a35;
+$page-top-bg: #293341;
+$primary: #FFC107 !default;
+$primary_selected: #FF9800 !default;
+$info: #2dacd1 !default;
+$success: #90b900 !default;
+$warning: #dfb81c !default;
+$danger: #e85656 !default;
+
+$primary-light: tint($primary, 30%);
+$info-light: tint($info, 30%);
+$success-light: tint($success, 30%);
+$warning-light: tint($warning, 30%);
+$danger-light: tint($danger, 30%);
+
+$primary-dark: shade($primary, 15%);
+$info-dark: shade($info, 15%);
+$success-dark: shade($success, 15%);
+$warning-dark: shade($warning, 15%);
+$danger-dark: shade($danger, 15%);
+
+$primary-bg: tint($primary, 20%);
+$info-bg: tint($info, 20%);
+$success-bg: tint($success, 20%);
+$warning-bg: tint($warning, 20%);
+$danger-bg: tint($danger, 20%);

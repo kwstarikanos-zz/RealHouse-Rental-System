@@ -1,0 +1,625 @@
+<md-dialog style="padding: 0px;" class="col-lg-6 col-md-8 col-sm-12" aria-label="Sign up">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <img src="/assets/img/house2.png" style="margin-right: 5px;">
+            <h2>Insert Your Residence In RealHouse</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon md-svg-src="assets/img/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content style="max-height:810px; ">
+        <form name="insertRoom" novalidate role="form" class="css-form">
+            <md-content>
+                <md-tabs md-selected="selectedIndex" md-dynamic-height md-border-bottom>
+                    <!--Room Pictures-->
+                    <md-tab label="Pictures">
+                        <md-content layout-padding="" ng-cloak="">
+                            <ng-form name="roomPicturesForm">
+
+                                <md-card layout="column">
+                                    <md-card-content style="height: 100%;">
+                                        <div flex layout="column">
+                                            <md-input-container class="md-block" style="margin: 0px; padding: 0;"
+                                                                flex-gt-xs>
+                                                <lf-ng-md-file-input
+                                                        name="pictures"
+                                                        lf-files="pictures"
+                                                        lf-required
+                                                        lf-filesize="1MB"
+                                                        lf-maxcount="10"
+                                                        lf-totalsize="10MB"
+                                                        lf-mimetype="image/*"
+                                                        lf-api="picturesApi"
+                                                        lf-option="optoin08"
+                                                        lf-browse-label="Search"
+
+                                                        multiple
+                                                        drag
+                                                        preview
+                                                        progress
+                                                        lf-on-file-click="onFileClick"
+                                                        lf-on-file-remove="onFileRemove"
+                                                        lf-on-submit-click="onSubmitClick"
+                                                >
+                                                </lf-ng-md-file-input>
+                                                <ng-messages for="roomPicturesForm.pictures.$error" role="alert"
+                                                             aria-live="assertive">
+                                                    <ng-message when="required" style="opacity: 1; color: #ffc107;">Place 1 to 10 images!</ng-message>
+                                                    <ng-message when="maxcount" style="opacity: 1; color: #ffc107;">You have exceeded the limit of 10 photos!</ng-message>
+                                                    <ng-message when="filesize" style="opacity: 1; color: #ffc107;">Add photos smaller than 1MB per file!</ng-message>
+                                                    <ng-message when="totalsize" style="opacity: 1; color: #ffc107;">The size of all photos must not exceed 10 MB!</ng-message>
+                                                    <ng-message when="mimetype" style="opacity: 1; color: #ffc107;">Only images allowed!</ng-message>
+                                                </ng-messages>
+
+                                            </md-input-container>
+
+                                        </div>
+                                    </md-card-content>
+                                </md-card>
+
+
+
+
+
+                                <!--next-->
+                                <md-button
+                                        type="button"
+                                        class="md-raised md-primary pull-right"
+                                        ng-click="selectedIndex=selectedIndex+1"
+                                        ng-disabled="roomPicturesForm.$invalid || roomPicturesForm.$pending"
+                                >
+                                    Next
+                                    <i class="fa fa-arrow-right"></i>
+                                </md-button>
+
+                                <!--reset-->
+                                <md-button
+                                        class="md-warn pull-left"
+                                        type="button"
+                                        ng-disabled="roomPicturesForm.pictures.$error.required"
+                                        ng-click="picturesApi.removeAll()"
+                                >
+                                    Reset
+                                    <i class="fa fa-eraser"></i>
+                                </md-button>
+                            </ng-form>
+                        </md-content>
+                    </md-tab>
+
+                    <!--Basic room info-->
+                     <md-tab label="Residence Information" ng-disabled="roomPicturesForm.$invalid">
+                         <md-content layout-padding="" ng-cloak="">
+                             <ng-form name="basicRoomForm">
+
+                                 <md-card layout="column">
+
+                                     <md-card-content style="height: 100%;">
+                                         <div layout="column">
+
+                                             <div layout-gt-xs="row">
+                                                 <!--Room Title-->
+                                                 <md-input-container class="md-block" flex-gt-xs>
+                                                     <label>Title</label>
+                                                     <input
+                                                             id="title"
+                                                             md-maxlength="100"
+                                                             name="title"
+                                                             ng-model="data.title"
+                                                             ng-pattern="/^([A-ZΑ-Ω]){1}[^0-9]*$/"
+                                                             upper-first-case
+                                                             placeholder="Give a catchy title for your residence..."
+                                                             required
+                                                     />
+                                                     <ng-messages for="basicRoomForm.title.$error" role="alert"
+                                                                  aria-live="assertive">
+                                                         <ng-message when="required">Required!</ng-message>
+                                                         <ng-message when="title">Invalid!</ng-message>
+                                                         <ng-message when="pattern">Invalid Title pattern for room!
+                                                             (TODO
+                                                             <----)
+                                                         </ng-message>
+                                                     </ng-messages>
+                                                 </md-input-container>
+
+                                                 <!--Room Type-->
+                                                 <md-input-container>
+                                                     <label>Room Type</label>
+                                                     <md-select
+                                                             id="selectedType"
+                                                             name="selectedType"
+                                                             ng-model="selectedType"
+                                                             placeholder="Select a residence type!"
+                                                             style="width: 200px;"
+                                                             required
+                                                     >
+                                                         <md-option ng-repeat="type in roomTypes" ng-value="type">
+                                                             {{type.name}}
+                                                         </md-option>
+                                                     </md-select>
+                                                     <ng-messages for="basicRoomForm.selectedType.$error"
+                                                                  role="alert"
+                                                                  aria-live="assertive">
+                                                         <ng-message when="required">Required!</ng-message>
+
+                                                         <ng-message when="selectedType">Invalid!</ng-message>
+                                                     </ng-messages>
+                                                 </md-input-container>
+                                             </div>
+
+
+                                             <div layout-gt-sm="row">
+                                                 <!--Room Neighborhood-->
+                                                 <md-input-container class="md-block" flex-gt-sm>
+                                                     <label>Neighborhood</label>
+                                                     <input
+                                                             id="neighborhood"
+                                                             name="neighborhood"
+                                                             type="text"
+                                                             ng-model="data.neighborhood"
+                                                             md-maxlength="100"
+                                                             ng-pattern="/^([A-ZΑ-Ω]){1}[^0-9]*$/"
+                                                             upper-first-case
+                                                             placeholder="Describe the neighborhood of the residence..."
+                                                             required
+                                                     /><!--ng-pattern="/^[a-z\d\.]{5,}$/"-->
+                                                     <ng-messages for="basicRoomForm.neighborhood.$error"
+                                                                  role="alert"
+                                                                  aria-live="assertive">
+                                                         <ng-message when="required">Required!</ng-message>
+                                                         <ng-message when="ng-minlength">Too short!</ng-message>
+                                                         <ng-message when="md-maxlength">Too long!</ng-message>
+                                                         <ng-message when="neighborhood">Invalid!</ng-message>
+                                                         <ng-message when="pattern">Username must consists at least 5
+                                                             characters
+                                                             (A-Z, 0-9) and/or (".") between them!
+                                                         </ng-message>
+                                                     </ng-messages>
+                                                 </md-input-container>
+                                             </div>
+
+
+                                             <!--Room Description-->
+                                             <md-input-container class="md-block">
+                                                 <label>Brief description</label>
+                                                 <input
+                                                         id="description"
+                                                         name="description"
+                                                         md-maxlength="1000"
+                                                         ng-pattern="/^([A-ZΑ-Ω]){1}[^0-9]*$/"
+                                                         upper-first-case
+                                                         placeholder="Give a brief description of your residence..."
+                                                         required md-no-asterisk
+                                                         ng-model="data.description"
+                                                 >
+                                                 <ng-messages for="basicRoomForm.description.$error" role="alert"
+                                                              aria-live="assertive">
+                                                     <ng-message when="required">Required!</ng-message>
+                                                     <ng-message when="title">Invalid!</ng-message>
+                                                     <ng-message when="pattern">Invalid description pattern for room!
+                                                         (TODO
+                                                         <----)
+                                                     </ng-message>
+                                                 </ng-messages>
+                                             </md-input-container>
+
+                                         </div>
+                                     </md-card-content>
+
+                                 </md-card>
+
+                                 <!--next-->
+                                 <md-button
+                                         type="button"
+                                         class="md-raised md-primary pull-right"
+                                         ng-click="selectedIndex=selectedIndex+1"
+                                         ng-disabled="basic_room_form_tab=basicRoomForm.$invalid || basicRoomForm.$pending"
+                                 >
+                                     Next
+                                     <i class="fa fa-arrow-right"></i>
+                                 </md-button>
+                                 <!--reset-->
+                                 <md-button
+                                         class="md-warn pull-left"
+                                         type="button"
+                                         ng-disabled="basicRoomForm.$pristine"
+                                         ng-click="reset(basicRoomForm);"
+                                 >
+                                     Reset
+                                     <i class="fa fa-eraser"></i>
+                                 </md-button>
+                             </ng-form>
+                         </md-content>
+                     </md-tab>
+
+                    <!--Additional room info-->
+                    <md-tab label="Residence Details" ng-disabled="basicRoomForm.$invalid">
+                        <md-content layout-padding="" ng-cloak="">
+                            <ng-form name="additionalRoomForm">
+                                <md-card layout="column">
+                                    <form name="imagesForm">
+                                        <md-card-content style="height: 100%;">
+                                            <div layout="column">
+                                                <strong>Insert the number of beds, bathrooms, bedrooms and
+                                                    guests: </strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <!--Beds, bathrooms, bedrooms, guests-->
+                                                <div style="margin: 16px; padding:16px">
+                                                    <!--Beds-->
+                                                    <md-input-container>
+                                                        <label>Beds</label>
+                                                        <input
+                                                                name="beds"
+                                                                id="beds"
+                                                                ng-model="data.beds"
+                                                                ng-pattern="/^\d+$/"
+                                                                min="1"
+                                                                required
+                                                                type="number"
+                                                        >
+                                                    </md-input-container>
+                                                    <!--Bedrooms-->
+                                                    <md-input-container>
+                                                        <label>Bedrooms</label>
+                                                        <input
+                                                                name="bedrooms"
+                                                                id="bedrooms"
+                                                                ng-model="data.bedrooms"
+                                                                ng-pattern="/^\d+$/"
+                                                                required
+                                                                type="number"
+                                                        >
+                                                    </md-input-container>
+                                                    <!--Bathrooms-->
+                                                    <md-input-container>
+                                                        <label>Bathrooms</label>
+                                                        <input
+                                                                name="bathrooms"
+                                                                id="bathrooms"
+                                                                ng-model="data.bathrooms"
+                                                                ng-pattern="/^\d+$/"
+                                                                required
+                                                                type="number"
+                                                        >
+                                                    </md-input-container>
+                                                    <!--Guests-->
+                                                    <md-input-container>
+                                                        <label>Guests</label>
+                                                        <input
+                                                                name="max_people"
+                                                                id="max_people"
+                                                                ng-model="data.max_people"
+                                                                ng-pattern="/^\d+$/"
+                                                                min="1"
+                                                                max="16"
+                                                                required
+                                                                type="number"
+                                                        >
+                                                    </md-input-container>
+                                                </div>
+                                                <!--Overnight price, Minimum overnights, extra price per person, room/house square meters-->
+                                                <strong>Insert the overnight price, the minimum overnights, extra price
+                                                    per person
+                                                    and the room/house square meters: </strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <div style="margin: 16px; padding:16px">
+                                                    <!--Overnight Price-->
+                                                    <md-input-container>
+                                                        <label>Overnight Price</label>
+                                                        <input
+                                                                name="overnight_price"
+                                                                id="overnight_price"
+                                                                ng-model="data.overnight_price"
+                                                                ng-pattern="/^\d+$/"
+                                                                min="1"
+                                                                required
+                                                                type="number"
+                                                        >
+                                                    </md-input-container>
+                                                    <!--Minimum Overnights-->
+                                                    <md-input-container>
+                                                        <label>Minimum Overnights</label>
+                                                        <input
+                                                                name="min_overnights"
+                                                                id="min_overnights"
+                                                                ng-model="data.min_overnights"
+                                                                ng-pattern="/^\d+$/"
+                                                                min="1"
+                                                                required
+                                                                type="number"
+                                                        >
+                                                    </md-input-container>
+                                                    <!--Extra Price Per Person-->
+                                                    <md-input-container>
+                                                        <label>Extra Price Per Person</label>
+                                                        <input
+                                                                name="extra_person_price"
+                                                                id="extra_person_price"
+                                                                ng-model="data.extra_person_price"
+                                                                ng-pattern="/^\d+$/"
+                                                                required
+                                                                type="number"
+                                                        >
+                                                    </md-input-container>
+                                                    <!--Square meters-->
+                                                    <md-input-container>
+                                                        <label>Square meters</label>
+                                                        <input
+                                                                name="square_meters"
+                                                                id="square_meters"
+                                                                ng-model="data.square_meters"
+                                                                ng-pattern="/^\d+$/"
+                                                                min="1"
+                                                                required
+                                                                type="number"
+                                                        >
+                                                    </md-input-container>
+                                                </div>
+                                            </div>
+                                        </md-card-content>
+                                    </form>
+                                </md-card>
+                                <md-button
+                                        class="md-warn pull-left"
+                                        ng-disabled="additionalRoomForm.$pristine"
+                                        ng-click="reset(additionalRoomForm)"
+                                >
+                                    Reset
+                                    <i class="fa fa-eraser"></i>
+                                </md-button>
+
+                                <md-button
+                                        type="button"
+                                        class="md-raised md-primary pull-right"
+                                        ng-click="selectedIndex=selectedIndex+1"
+                                        ng-disabled="contact_tab=additionalRoomForm.$invalid || additionalRoomForm.$pending"
+                                >
+                                    Next
+                                    <i class="fa fa-arrow-right"></i>
+                                </md-button>
+
+                            </ng-form>
+                        </md-content>
+                    </md-tab>
+
+                    <!--Room Location-->
+                    <md-tab label="Location - Transport"
+                            ng-disabled="basicRoomForm.$invalid || additionalRoomForm.$invalid">
+                        <md-content layout-padding="" ng-cloak="">
+                            <ng-form name="roomLocationForm">
+                                <form name="imagesForm">
+                                    <md-card layout="column">
+                                        <md-card-header>
+                                            <md-card-header-text>
+                                                <span class="md-title">Pick a location...</span>
+                                            </md-card-header-text>
+                                        </md-card-header>
+                                        <md-card-content style="height: 100%;">
+                                            <div layout="column">
+                                                <md-input-container class="md-block">
+                                                    <label>Residence address</label>
+                                                    <input
+                                                            id="formatted_address"
+                                                            name="formatted_address"
+                                                            type="text"
+                                                            ng-model="data.address.formatted_address"
+                                                            ng-minlength="4"
+                                                            placeholder="Setup your residence address or pick a location in map..."
+                                                            valid-location
+                                                            required
+                                                            googleplace
+                                                    />
+                                                    <ng-messages for="roomLocationForm.formatted_address.$error"
+                                                                 role="alert"
+                                                                 aria-live="assertive">
+                                                        <ng-message when="required">Required!</ng-message>
+                                                        <ng-message when="pattern">Wrong input!</ng-message>
+                                                        <ng-message when="ng-minlength">Too short!</ng-message>
+                                                        <ng-message when="location_invalid">Enter valid location!
+                                                        </ng-message>
+                                                    </ng-messages>
+                                                </md-input-container>
+                                            </div>
+
+                                            <div layout="column">
+                                                <div id="registerMap"></div>
+                                            </div>
+                                        </md-card-content>
+                                    </md-card>
+                                    <md-card layout="column">
+                                        <md-card-header>
+                                            <md-card-header-text>
+                                                <span class="md-title">Pick the available means of transport in the neighborhood...</span>
+                                            </md-card-header-text>
+                                        </md-card-header>
+                                        <md-card-content style="height: 100%;">
+                                            <div layout="row">
+                                                <div flex>
+                                                    <md-checkbox
+                                                            ng-repeat="transport in setTransports"
+                                                            ng-checked="existsTransport(transport, selectedTransport)"
+                                                            ng-click="toggleTransport(transport, selectedTransport)"
+                                                    >
+                                                        {{ transport.transport }}
+                                                    </md-checkbox>
+                                                </div>
+                                            </div>
+                                            <div layout="row">
+                                                <!--Room Transport Description-->
+                                                <md-input-container class="md-block" flex-gt-sm>
+                                                    <label>Neighborhood transport</label>
+                                                    <input
+                                                            id="transport"
+                                                            name="transport"
+                                                            ng-model="data.transport"
+                                                            md-maxlength="100"
+                                                            upper-first-case
+                                                            placeholder="Describe further the distances and available means of public transport..."
+                                                            required
+                                                    />
+                                                    <ng-messages for="roomLocationForm.transport.$error" role="alert"
+                                                                 aria-live="assertive">
+                                                        <ng-message when="required">Required!</ng-message>
+                                                        <ng-message when="ng-minlength">Too short!</ng-message>
+                                                        <ng-message when="md-maxlength">Too long!</ng-message>
+                                                        <ng-message when="transport">Invalid!</ng-message>
+                                                    </ng-messages>
+                                                </md-input-container>
+                                            </div>
+                                        </md-card-content>
+                                    </md-card>
+                                </form>
+                                <md-button
+                                        type="button"
+                                        class="md-raised md-primary pull-right"
+                                        ng-click="selectedIndex=selectedIndex+1"
+                                        ng-disabled="submit_tab=roomLocationForm.$invalid || roomLocationForm.$pending"
+                                >
+                                    Next
+                                    <i class="fa fa-arrow-right"></i>
+                                </md-button>
+                            </ng-form>
+                        </md-content>
+                    </md-tab>
+
+                    <!--Amenities and Rules-->
+                    <md-tab label="Amenities And Rules"
+                            ng-disabled="basicRoomForm.$invalid || additionalRoomForm.$invalid || roomLocationForm.$invalid">
+                        <md-content layout-padding="" ng-cloak="">
+                            <ng-form name="extraRoomForm">
+                                <md-card layout="column">
+                                        <md-card-content style="height: 100%;">
+                                            <div layout="column">
+                                                <div layout="row">
+                                                    <div flex>
+                                                        <h3>Check your house rules:</h3>
+                                                        <div ng-repeat="rule in setRules">
+                                                            <md-checkbox ng-checked="existsRule(rule, selectedRule)"
+                                                                         ng-click="toggleRule(rule, selectedRule)">
+                                                                {{ rule.rule }} <span
+                                                                    ng-if="existsRule(rule, selectedRule)">selected</span>
+                                                            </md-checkbox>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!--Room House Rules-->
+                                                <md-input-container class="md-block">
+                                                    <label>House Rules Description</label>
+                                                    <input
+                                                            id="house_rules"
+                                                            name="house_rules"
+                                                            type="text"
+                                                            ng-model="data.house_rules"
+                                                            ng-minlength="5"
+                                                            md-maxlength="100"
+                                                            required
+                                                    /><!--ng-pattern="/^[a-z\d\.]{5,}$/"-->
+                                                    <ng-messages for="extraRoomForm.house_rules.$error" role="alert"
+                                                                 aria-live="assertive">
+                                                        <ng-message when="required">Required!</ng-message>
+                                                        <ng-message when="ng-minlength">Too short!</ng-message>
+                                                        <ng-message when="md-maxlength">Too long!</ng-message>
+                                                        <ng-message when="house_rules">Invalid!</ng-message>
+                                                        <ng-message when="pattern">invalid pattern</ng-message>
+                                                    </ng-messages>
+                                                </md-input-container>
+                                            </div>
+                                        </md-card-content>
+                                </md-card>
+                                <md-card layout="column">
+                                    <md-card-content style="height: 100%;">
+                                        <div layout="column">
+                                            <div layout="row">
+                                                <div flex>
+                                                    <h3>Check your house amenities:</h3>
+                                                    <div ng-repeat="amenity in setAmenities">
+                                                        <md-checkbox
+                                                                ng-checked="existsAmenity(amenity, selectedAmenity)"
+                                                                ng-click="toggleAmenity(amenity, selectedAmenity)">
+                                                            {{ amenity.amenity }} <span
+                                                                ng-if="existsAmenity(amenity, selectedAmenity)">selected</span>
+                                                        </md-checkbox>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </md-card-content>
+                                </md-card>
+                                <md-button
+                                        type="button"
+                                        class="md-raised md-primary pull-right"
+                                        ng-click="selectedIndex=selectedIndex+1"
+                                        ng-disabled="submit_tab=extraRoomForm.$invalid || extraRoomForm.$pending"
+                                >
+                                    Next
+                                    <i class="fa fa-arrow-right"></i>
+                                </md-button>
+                            </ng-form>
+                        </md-content>
+                    </md-tab>
+
+                    <!--Review and finish-->
+                    <md-tab label="Review & Finish"
+                            ng-disabled="basicRoomForm.$invalid || additionalRoomForm.$invalid || roomLocationForm.$invalid || extraRoomForm.$invalid">
+                        <md-content class="md-padding">
+                            <ng-form name="submit">
+                                <md-card layout="column">
+                                    <form name="imagesForm">
+                                        <md-card-content style="height: 100%;">
+                                            <div layout="column">
+                                                <h5>Basic room info</h5>
+                                                <h6>Room Type: <span ng-bind="data.type.type"></span></h6>
+                                                <h6>Title: <span ng-bind="data.title"></span></h6>
+                                                <h6>Description: <span ng-bind="data.description"></span></h6>
+                                                <h6>Neighborhood: <span ng-bind="data.neighborhood"></span></h6>
+                                                <h6>House rules: <span ng-bind="data.house_rules"></span></h6>
+                                                <h6>Transport: <span ng-bind="data.transport"></span></h6>
+                                            </div>
+                                            <div layout="column">
+                                                <h5>Additional room info</h5>
+                                                <h6>Beds: <span ng-bind="data.beds"></span></h6>
+                                                <h6>Bathrooms: <span ng-bind="data.bathrooms"></span></h6>
+                                                <h6>Bedrooms: <span ng-bind="data.bedrooms"></span></h6>
+                                                <h6>Guests: <span ng-bind="data.max_people"></span></h6>
+                                                <h6>Overnight price: <span ng-bind="data.overnight_price"></span></h6>
+                                                <h6>Minimum overnights: <span ng-bind="data.min_overnights"></span></h6>
+                                                <h6>Extra price per person: <span
+                                                        ng-bind="data.extra_person_price"></span></h6>
+                                                <h6>Square meters: <span ng-bind="data.square_meters"></span></h6>
+                                            </div>
+                                            <div layout="column">
+                                                <h5>Location</h5>
+                                                <h6 ng-bind="data.address.formatted_address"></h6>
+                                            </div>
+                                        </md-card-content>
+                                    </form>
+                                </md-card>
+                                <div style="float: right;">
+                                    <!--BUTTON: InsertRoom-->
+                                    <button
+                                            ng-class="{
+                                            'btn': true,
+                                            'btn-success': insertRoom.$valid,
+                                            'btn-warning': insertRoom.$invalid
+                                            }"
+                                            ng-click="hostRoom()"
+                                    ><!--ng-disabled="dataLoading || insertRoom.$invalid || insertRoom.$pending"-->
+                                        Room Insert
+                                        <i ng-class="{'fa': true, 'fa fa-cog fa-spin': dataLoading,
+                                        'fa fa-sign-in': !dataLoading }"
+                                        ></i>
+                                    </button>
+                                </div>
+                            </ng-form>
+                        </md-content>
+                    </md-tab>
+
+                </md-tabs>
+
+                <div style="height:5px;">
+                    <md-progress-linear md-mode="indeterminate" ng-if="dataLoading"></md-progress-linear>
+                </div>
+            </md-content>
+        </form>
+    </md-dialog-content>
+</md-dialog>

@@ -1,0 +1,47 @@
+.daterangepicker {
+  background-color: rgba(30, 42, 53, 0.70);
+  transition: all 1.3s !important;
+}
+
+.daterangepicker .input-mini {
+  border: 1px solid #424242;
+  color: #fff;
+}
+
+.daterangepicker .calendar-table {
+  border: 1px solid rgb(13, 18, 17);
+  padding: 5px;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.daterangepicker td.in-range {
+  background-color: $primary !important;
+}
+
+.daterangepicker td.active, .daterangepicker td.active:hover {
+  background-color: $primary_selected !important;
+  color: #000000;
+}
+
+.daterangepicker td.available:hover, .daterangepicker th.available:hover {
+  background-color: $primary_selected !important;
+  color: #000000;
+}
+
+.daterangepicker td, .daterangepicker th {
+  transition: color 0.2s ease;
+  border-radius: 0;
+}
+
+.daterangepicker td.start-date {
+  border-radius: 0;
+}
+
+.daterangepicker td.end-date {
+  border-radius: 0 !important;
+}
+
+.daterangepicker td.off, .daterangepicker td.off.in-range, .daterangepicker td.off.start-date, .daterangepicker td.off.end-date {
+  background-color: rgba(66, 66, 66, 0);
+  color: #424242 !important;
+}

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module classpath="eclipse" classpath-dir="$MODULE_DIR$" org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="web" name="Web">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/src/main/webapp" relative="/" />
+        </webroots>
+        <sourceRoots>
+          <root url="file://$MODULE_DIR$/src/main/java" />
+          <root url="file://$MODULE_DIR$/src/main/resources" />
+          <root url="file://$MODULE_DIR$/src/main/webapp/resources" />
+        </sourceRoots>
+      </configuration>
+    </facet>
+    <facet type="jpa" name="JPA">
+      <configuration>
+        <setting name="validation-enabled" value="true" />
+        <setting name="provider-name" value="EclipseLink" />
+        <datasource-mapping>
+          <factory-entry name="Entities" value="90406a4d-4ae7-4e06-a37f-3277dd2a15a2" />
+          <factory-entry name="MessagePersistenceUnit" value="90406a4d-4ae7-4e06-a37f-3277dd2a15a2" />
+          <factory-entry name="MessengerUnit" value="dea00447-8fa6-4538-8187-75dc9614c8d8" />
+          <factory-entry name="PersistenceUnit" value="1aca8b49-5ab7-4fbb-9e1b-57e1386134a1" />
+          <factory-entry name="RestfulExampleWithJSON" value="90406a4d-4ae7-4e06-a37f-3277dd2a15a2" />
+        </datasource-mapping>
+        <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/java/ted/rental/database/entities/META-INF/persistence.xml" />
+      </configuration>
+    </facet>
+    <facet type="Spring" name="Spring">
+      <configuration>
+        <fileset id="fileset" name="Spring Application Context" removed="false">
+          <file>file://$MODULE_DIR$/src/main/webapp/WEB-INF/cxf-beans.xml</file>
+        </fileset>
+        <fileset id="fileset2" name="Spring Application Context (2)" removed="false">
+          <file>file://$MODULE_DIR$/src/main/java/ted/rental/config/AppConfig.java</file>
+        </fileset>
+      </configuration>
+    </facet>
+  </component>
+</module>

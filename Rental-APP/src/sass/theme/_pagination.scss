@@ -1,0 +1,33 @@
+.pagination > li:first-of-type > a, .pagination > li:first-of-type > span {
+  border-top-left-radius: 2px !important;
+  border-bottom-left-radius: 2px !important;
+}
+
+.pagination > li:first-child > a, .pagination > li:first-child > span {
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+}
+.pagination > li:first-child > a, .pagination > li:first-child > span {
+  margin-left: 0 !important;
+  border-top-left-radius: 2px !important;
+  border-bottom-left-radius: 2px !important;
+}
+
+.pagination > li > a, .pagination > li > span {
+  color: #4caf50 !important;
+  border-color: rgba(0, 0, 0, 0) !important;
+}
+
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+  background-color: $primary !important;
+  color: white !important;
+}
+
+.pagination > .disabled > span, .pagination > .disabled > span:hover, .pagination > .disabled > span:focus, .pagination > .disabled > a, .pagination > .disabled > a:hover, .pagination > .disabled > a:focus {
+  color: #999 !important;
+  background-color: rgba(0, 0, 0, 0) !important;
+}
+
+.pagination > li > a, .pagination > li > span {
+  cursor: pointer;
+}

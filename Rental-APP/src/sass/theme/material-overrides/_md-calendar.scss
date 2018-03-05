@@ -1,0 +1,49 @@
+.md-datepicker-calendar-pane.md-pane-open .md-calendar {
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.md-calendar.md-default-theme tr:last-child td, .md-calendar tr:last-child td {
+  border-bottom-color: rgb(66, 66, 66);
+}
+
+.md-calendar-date.md-focus .md-default-theme .md-calendar-date-selection-indicator, .md-calendar-date.md-focus .md-calendar-date-selection-indicator, .md-default-theme .md-calendar-date-selection-indicator:hover, .md-calendar-date-selection-indicator:hover {
+  background: rgb(139, 195, 74);
+  color: black;
+}
+
+.md-default-theme .md-calendar-date.md-calendar-selected-date .md-calendar-date-selection-indicator, .md-calendar-date.md-calendar-selected-date .md-calendar-date-selection-indicator, .md-default-theme .md-calendar-date.md-focus.md-calendar-selected-date .md-calendar-date-selection-indicator, .md-calendar-date.md-focus.md-calendar-selected-date .md-calendar-date-selection-indicator {
+  background: $primary;
+  color: rgb(0, 0, 0);
+  border-color: transparent;
+}
+
+.md-default-theme .md-calendar-date.md-calendar-date-today .md-calendar-date-selection-indicator, .md-calendar-date.md-calendar-date-today .md-calendar-date-selection-indicator {
+  border: 1px solid $primary;
+}
+
+.md-calendar-date.md-calendar-date-disabled {
+  cursor: default;
+  color: #424242;
+}
+
+.md-default-theme .md-calendar-day-header, .md-calendar-day-header {
+  background: #1b2127;
+  color: white;
+}
+
+.md-calendar tbody, .md-calendar td, .md-calendar tr {
+  background: rgb(15, 21, 27);
+  color: #ffffff;
+}
+
+.md-default-theme .md-datepicker-calendar, .md-datepicker-calendar {
+  background: rgba(0, 0, 0, 0.60);
+}
+
+
+
+md-backdrop.md-opaque {
+  opacity: 0;
+}
