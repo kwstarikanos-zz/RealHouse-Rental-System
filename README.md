@@ -2,6 +2,7 @@
 
 ## Front End / APP
 
+<img alt="front_end_screenshot" src="https://raw.githubusercontent.com/kwstarikanos/RealHouse-Rental-System/master/screenshot.png">
 
 ### Instalation:
 
@@ -41,4 +42,8 @@ and wait until the realhouse app open with your default browser.
 
 
 ## Back End / API
+
+
+
+
 
